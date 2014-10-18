@@ -55,12 +55,22 @@ your.external.ip  stella.master.gamespy.com
 
 ###WebServer
 
+**NOTE**: Stats requires PHP >= 5.3.8
+
 1. Unzip folder "web" to your localhost folder (**WARNING**: Stats system won't work at another location!)
 2. Open ./include/_ccconfig.php and change $db_host, $db_name, $db_user, $db_pass to yours, which you installed in Fesl Login (step 4)
-3. Open your database in MySQL (phpmyadmin or another utility), open table "servers" and add two new entries (local and external IP) and key "authorised" 1.
+3. Open your database in MySQL (phpmyadmin/ or another utility), open table "servers" and add two new entries (local and external IP) and key "authorised" 1.
 4. Open your PHP config file (php.ini) and change 
 
 ```
 error_reporting = E_NONE
 display_errors = Off
 ```
+
+
+###GameServer
+
+1. Download BF2142 serverfiles
+2. Extract "python" folder to the main folder with server. Agree with overwriting.
+3. Patch BF2142_w32ded.exe with lpatch.exe ("exe_patch" folder). **NOTE**: 1.25 patch with fesl_1.25.lpatch, 1.51 - fesl.lpatch
+4. Configure your server gameplay settings and start BF2142_w32ded.exe.
