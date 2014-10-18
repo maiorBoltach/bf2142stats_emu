@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<news>
+	<newsitem header="Последние новости" imageUrl="http://127.0.0.1/BF2142EANews/newsreader_screen.png">
+		<p>News</p>		
+		<p>Welcome!</p>		
+	</newsitem>
+</news>

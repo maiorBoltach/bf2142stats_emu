@@ -1,0 +1,794 @@
+    <HTML> 
+	<HEAD> 
+	    <TITLE>1.2 - PHP common data validation routines.
+
+</TITLE> 
+	</HEAD>
+
+	<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#METHODS">METHODS</A>
+	<UL>
+
+		<LI><A HREF="#Validator_">Validator()</A>
+		<LI><A HREF="#clear_error_">clear_error()</A>
+		<LI><A HREF="#has_space_text_">has_space($text)</A>
+		<LI><A HREF="#chconvert_fragment_">chconvert($fragment)</A>
+		<LI><A HREF="#get_perms_fileName_">get_perms($fileName)</A>
+		<LI><A HREF="#is_sane_filename_">is_sane($filename)</A>
+		<LI><A HREF="#strip_space_text_">strip_space($text)</A>
+		<LI><A HREF="#is_allnumbers_text_">is_allnumbers($text)</A>
+		<LI><A HREF="#strip_numbers_text_">strip_numbers($text)</A>
+		<LI><A HREF="#is_allletters_text_">is_allletters($text)</A>
+		<LI><A HREF="#strip_letters_text_">strip_letters($text)</A>
+		<LI><A HREF="#has_html_text_">has_html($text)</A>
+		<LI><A HREF="#strip_html_text_">strip_html($text)</A>
+		<LI><A HREF="#has_metas_text_">has_metas($text)</A>
+		<LI><A HREF="#strip_metas_text_">strip_metas($text)</A>
+		<LI><A HREF="#custom_strip_array_text_">custom_strip($array, $text)</A>
+		<LI><A HREF="#array_echo_MyArray_Name_Ar">array_echo($MyArray, $Name = "Array")</A>
+		<LI><A HREF="#is_email_Address_">is_email($Address = "")</A>
+		<LI><A HREF="#is_url_Url_">is_url($Url = "")</A>
+		<LI><A HREF="#url_responds_Url_">url_responds($Url = "")</A>
+		<LI><A HREF="#is_phone_Phone_">is_phone($Phone = "")</A>
+		<LI><A HREF="#is_hostname_hostname_">is_hostname($hostname = "")</A>
+		<LI><A HREF="#is_bigfour_tld_">is_bigfour($tld)</A>
+		<LI><A HREF="#is_host_hostname_type_">is_host($hostname = "", $type = "ANY")</A>
+		<LI><A HREF="#is_ipaddress_IP_">is_ipaddress($IP = "")</A>
+		<LI><A HREF="#ip_resolves_IP_">ip_resolves($IP = "")</A>
+		<LI><A HREF="#browser_gen_">browser_gen()</A>
+		<LI><A HREF="#is_state_State_">is_state($State = "")</A>
+		<LI><A HREF="#is_zip_zipcode_">is_zip($zipcode = "")</A>
+		<LI><A HREF="#is_country_countrycode_">is_country($countrycode = "")</A>
+	</UL>
+
+	<LI><A HREF="#VARIABLES">VARIABLES</A>
+	<UL>
+
+		<LI><A HREF="#ERROR_string_">ERROR (string)</A>
+		<LI><A HREF="#CLEAR_boolean_default_false">CLEAR (boolean, default == false)</A>
+	</UL>
+
+	<LI><A HREF="#EXAMPLES">EXAMPLES</A>
+	<LI><A HREF="#DOCUMENTATION">DOCUMENTATION</A>
+	<LI><A HREF="#INSTALLATION">INSTALLATION</A>
+	<LI><A HREF="#BUGS">BUGS</A>
+	<LI><A HREF="#VERSION">VERSION</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+	<LI><A HREF="#LICENSE">LICENSE</A>
+	<LI><A HREF="#AVAILABILITY">AVAILABILITY</A>
+	<LI><A HREF="#HISTORY">HISTORY</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+Validator 1.2 - PHP common data validation routines.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+<PRE>  include(&quot;class.Validator.php3&quot;);
+</PRE>
+
+<P>
+
+<PRE>  $check = new Validator ();
+</PRE>
+
+<P>
+
+<PRE>  $email = 'cdi@thewebmasters.net';
+  $state = 'WA';
+  $cc = 'US';
+  $phone = '206-123-4567';
+  $zip = '9999-1111';
+  $url = '<A HREF="http://buzz.builder.com/">http://buzz.builder.com/</A>';
+  $misc = 'Now$ is the\.*Time of &quot;our&quot; (discontent)!';
+  $ip    = '206.79.157.144';
+  $host = 'buzz.builder.com';
+  $file = &quot;/home/httpd/html/index.html&quot;;
+</PRE>
+
+<P>
+
+<PRE>  if (!$check-&gt;is_email($email))  { echo &quot;Invalid email format\n&quot;;}
+  if (!$check-&gt;is_state($state))  { echo &quot;Invalid state code\n&quot;;  }
+  if (!$check-&gt;is_country($cc))   { echo &quot;Invalid country code\n&quot;;}
+  if (!$check-&gt;is_phone($phone))  { echo &quot;Invalid phone format\n&quot;;}
+  if (!$check-&gt;is_zip($zip))      { echo &quot;Invalid zip code\n&quot;;    }
+  if (!$check-&gt;is_url($url))      { echo &quot;Invalid URL format\n&quot;;  }
+  if (!$check-&gt;url_responds($url)){ echo &quot;Url not responding\n&quot;;  }
+  if (!$check-&gt;is_ipaddress($ip)) { echo &quot;Invalid IP format\n&quot;;   }
+  if (!$check-&gt;ip_resolves($ip))  { echo &quot;No RDNS for IP\n&quot;;      }
+  if (!$check-&gt;is_host($host))    { echo &quot;Invalid host name\n&quot;;   }
+  if (!$check-&gt;is_sane($file))    { echo &quot;Tainted file\n&quot;;        }
+</PRE>
+
+<P>
+
+<PRE>  $clean = $check-&gt;strip_metas($misc);
+  $myJunk = array('!',''','=');
+  $clean = $check-&gt;custom_strip($myJunk,$clean);
+  $browser = $check-&gt;browser_gen();
+  echo &quot;You are using a $browser generation browser&quot;;
+</PRE>
+
+<P>
+
+<PRE>  if ($check-&gt;ERROR)              { echo &quot;$check-&gt;ERROR\n&quot;;       }
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+Validator is a class containing common data validation routines. Using this
+class your programs can validate a wide variety of data types common to
+forms and the internet in general. Included with the various data
+validation routines are several ``common'' string and array manipulation
+routines. In short, this is a class designed to conduct grunt work on
+submitted data. This version of Validator contains 19 data tests, 9 data
+manipulation methods, and one array debugging tool.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="Validator_">Validator()
+
+</A></H2>
+The new <CODE>Validator()</CODE> method simply creates a new object. No
+arguments needed.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="clear_error_">clear_error()
+
+</A></H2>
+When any of the following tests fail, Validator sets the ERROR variable
+with the text description of why the test failed. Since the ERROR is
+static, the ERROR variable always contains the last error encountered. To
+clear the error, call this method. If you want to <STRONG>automatically</STRONG> clear errors, set the CLEAR variable to true. (False by default) If the
+CLEAR variable is true, Validator will automatically clear the ERROR
+variable <STRONG>at
+the beginning of any new test</STRONG>. Example;
+
+
+<P>
+
+<PRE>  $check-&gt;CLEAR = true;
+  $email = 'cdi @ example.com';
+  $host = 'example.com';
+</PRE>
+
+<P>
+
+<PRE>  if(!$check-&gt;is_email($email)) { echo &quot;$check-&gt;ERROR\n&quot;; }
+</PRE>
+
+<P>
+
+<PRE>  // ERROR now contains &quot;is_email: Whitespace in [cdi ]@[ example.com]&quot;
+</PRE>
+
+<P>
+
+<PRE>  if(!$check-&gt;is_hostname($host)) { echo &quot;$check-&gt;ERROR\n&quot;; }
+</PRE>
+
+<P>
+
+<PRE>  // ERROR now contains &quot;&quot;, because is_hostname succeeded.
+</PRE>
+
+<P>
+
+<PRE>  // Since CLEAR is true, and example.com is a valid hostname, ERROR has
+  // been cleared.  If CLEAR were false, ERROR would still contain the
+  // whitespace error from the is_email check
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="has_space_text_">has_space($text)
+
+</A></H2>
+Test. Returns true if the submitted text has spaces or tabs in it. False
+otherwise.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="chconvert_fragment_">chconvert($fragment)
+
+</A></H2>
+Internal Manipulation. Converts an (octal) numeric value into it's visual
+representation of a file permission segment. (eg, 7 == 'rwx')
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="get_perms_fileName_">get_perms($fileName)
+
+</A></H2>
+Returns a 4 element array based on the specified file or directories file
+permissions. The array has the following structure:
+
+
+<P>
+
+<PRE>    octal permission value, string user, string group, string other
+</PRE>
+
+<P>
+
+The keys for the array are ``octal'', ``user'', ``group'', and ``other''.
+
+
+<P>
+
+The ``user'',``group'',``other'' keys have values matching that returned
+from an
+<STRONG>ls -l</STRONG> command, so if the file's octal value were 744, user,group, and other would
+be as follows:
+
+
+<P>
+
+<PRE>    &quot;user&quot;  == &quot;rwx&quot;
+    &quot;group&quot; == &quot;r--&quot;
+    &quot;other&quot; == &quot;r--&quot;
+</PRE>
+
+<P>
+
+Example:
+
+
+<P>
+
+<PRE>    $perms = $check-&gt;get_perms($fileName);
+</PRE>
+
+<P>
+
+<PRE>        $octal = $perms[&quot;octal&quot;];
+        $user  = $perms[&quot;user&quot;];
+        if(ereg(&quot;r&quot;,$user)) { echo &quot;File is readable by user&quot;; }
+</PRE>
+
+<P>
+
+Returns null on failure to <CODE>stat()</CODE> the specified file. If any
+specific segment of the file's permission is mis-understood, that segment
+will be set to ``unk''.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_sane_filename_">is_sane($filename)
+
+</A></H2>
+Test. Returns true if the file is sane. False otherwise. The checks are;
+is_readable, is_writeable, is_dir, is_link. If the first two fail or the
+last two succeed, returns false.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="strip_space_text_">strip_space($text)
+
+</A></H2>
+Manipulation. Strips all spaces and tabs from the submitted text and
+returns the altered text.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_allnumbers_text_">is_allnumbers($text)
+
+</A></H2>
+Test. Returns true if the submitted text contains only numbers, and returns
+true if the <CODE>gettype()</CODE> test returns ``integer''. False
+otherwise.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="strip_numbers_text_">strip_numbers($text)
+
+</A></H2>
+Manipulation. Strips all numbers from the submitted text and returns the
+altered content.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_allletters_text_">is_allletters($text)
+
+</A></H2>
+Test. Returns true if the text contains only A-z characters. False
+otherwise, case insensitive.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="strip_letters_text_">strip_letters($text)
+
+</A></H2>
+Manipulation. Strips A-z from submitted text and returns the results. Case
+insensitive.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="has_html_text_">has_html($text)
+
+</A></H2>
+Test. Returns true if the text submitted contained HTML entities. False
+otherwise. Tests for &lt;, &gt;, ``, and &amp; .
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="strip_html_text_">strip_html($text)
+
+</A></H2>
+Manipulation. Strips all html entities, tags and attributes from the
+submitted text and returns the results (plain text). It's not a very
+efficient method but it is accurate. Don't use this method to remove html
+from a file. Use PHPs much faster and more efficient <CODE>fgetss()</CODE>
+function.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="has_metas_text_">has_metas($text)
+
+</A></H2>
+Test. Returns true if the submitted text contains shell meta characters.
+The test revolves around the <CODE>quotemeta()</CODE> method. See the PHP
+documentation for the <CODE>quotemeta()</CODE> method.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="strip_metas_text_">strip_metas($text)
+
+</A></H2>
+Manipulation. All shell meta chars are completely removed from the
+submitted string. See the PHP <CODE>quotemeta()</CODE> documentation for
+the chars it removes.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="custom_strip_array_text_">custom_strip($array, $text)
+
+</A></H2>
+Manipulation. Will strip a user defined array of characters from the
+submitted text, and return the modified string. This method uses the
+<CODE>str_replace()</CODE> function, and is meta-character safe. 
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="array_echo_MyArray_Name_Ar">array_echo($MyArray, $Name = "Array")
+
+</A></H2>
+Debug tool. <CODE>Array_echo()</CODE> walks through an array and echos the
+key=value pairs as an HTML table. Multi-dimensional arrays are handled
+recursively. The <CODE>$Name</CODE> is used to identify the name of the
+parent array. It can be set to whatever you want. Example;
+
+
+<P>
+
+<PRE>  $config = new Config($ConfigFile);
+  $check-&gt;array_echo($config-&gt;param, &quot;Param&quot;);
+</PRE>
+
+<P>
+
+Array_echo is only useful for debugging. I can't think of any legitimate
+reason to use this method in a real program. It definitely comes in handy
+when debugging large multi-dimensional arrays.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_email_Address_">is_email($Address = "")
+
+</A></H2>
+Test. Validates an email address. Looks for standard
+[user]@[hostname].[tld] format. This is NOT an RFC 822 compliant check.
+<CODE>is_email()</CODE> goes one further than just syntax, and verifies
+that the hostname portion of the email address has a valid DNS record. If
+the hostname portion of the submitted email does NOT have an DNS record,
+it's obviously an invalid email address regardless of it's format. So <A
+HREF="MAILTO:'cdi@example.com'">'cdi@example.com'</A> would return false,
+because example.com does not have a DNS record. The DNS check requires
+internet connectivity to succeed.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_url_Url_">is_url($Url = "")
+
+</A></H2>
+Test. Checks for valid http and ftp URL format. Looks for a leading
+'http://' or 'ftp://' followed by a valid hostname, followed by any
+arbitrary text (or nothing following the hostname). This test does not
+check for connectivity of the submitted URL - it only checks the format.
+The hostname check is conducted by the <CODE>is_hostname()</CODE> method.
+New in version 1.1, now properly uses the <CODE>parse_url()</CODE> function
+to split up the url before validating.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="url_responds_Url_">url_responds($Url = "")
+
+</A></H2>
+Test. Does an <CODE>is_url(),</CODE> and if that returns true, will then
+check that the URL is responding to requests. Obviously this routine
+requires a working internet connection in order to succeed. Returns true if
+the URL responded to a request, false otherwise.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_phone_Phone_">is_phone($Phone = "")
+
+</A></H2>
+Test. Checks a phone number for format. Can handle international phone
+numbers. Checks that the submitted string contains only 0-9, (, ), -, and +
+characters. Checks that the number, after removing any non-numeric
+characters, is no more than 13 numbers long and at least 7 digits long.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_hostname_hostname_">is_hostname($hostname = "")
+
+</A></H2>
+Test. Checks a hostname format. Does not check to see if the hostname is
+repsponding. Looks for [sometext].[tld] at the minimum. Only A-Z,0-9,-, and
+. are valid characters in this hostname check. Looks for common typos like
+double dots (example..com), leading dots (.example.com), trailing dots
+(example.com.), or no dots (examplecom). Modifications for version 1.1, now
+properly validates the TLD and squashes a potential bug.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_bigfour_tld_">is_bigfour($tld)
+
+</A></H2>
+Test. Submit a top-level domain for verification. The big four TLDs are
+COM, EDU, NET, and ORG. Returns true or false.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_host_hostname_type_">is_host($hostname = "", $type = "ANY")
+
+</A></H2>
+Test. Does an <CODE>is_hostname()</CODE> check and if that returns true,
+tests that the host has a DNS record. By default it checks for ``ANY'' DNS
+record. This can be overriden by specifying the type of record to look for.
+(eg MX, NS, A etc). If the <CODE>is_hostname()</CODE> and DNS checks both
+return true, this check returns true. False otherwise.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_ipaddress_IP_">is_ipaddress($IP = "")
+
+</A></H2>
+Test. Checks for valid dotted quad IP address notation. Does not check the
+connectivity of the IP, only it's format. It does check for common typos
+like leading zeros or quad notations greater than 255.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="ip_resolves_IP_">ip_resolves($IP = "")
+
+</A></H2>
+Test. Does an <CODE>is_ipaddress()</CODE> and if that returns true, checks
+to see if an IP has a reverse DNS entry.  <STRONG>valid IP addresses often do not resolve to a
+hostname</STRONG>. Do not assume that if the IP does not have a reverse DNS entry that the
+IP is not valid. This test simply looks for that reverse DNS entry and
+returns true or false appropriately.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="browser_gen_">browser_gen()
+
+</A></H2>
+Test. Grabs the <STRONG>HTTP_USER_AGENT</STRONG> environment variable and returns the associated GENERATION of that agent.
+Generations returned can be any of the following; <STRONG>FIRST</STRONG>, <STRONG>SECOND</STRONG>, <STRONG>THIRD</STRONG>, <STRONG>FOURTH</STRONG>, <STRONG>FIFTH</STRONG>, <STRONG>SPIDER</STRONG>,
+<STRONG>SPAMMER</STRONG>, <STRONG>ANONYMIZER</STRONG> or <STRONG>UNKNOWN</STRONG>. The number of <STRONG>SPIDER</STRONG> and
+<STRONG>SPAMMER</STRONG> agents known to the class are limited. Should accurately peg just about any
+other legitimate user agents though. If the
+<STRONG>HTTP_USER_AGENT</STRONG> variable is undefined or unknown, returns <STRONG>UNKNOWN</STRONG>.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_state_State_">is_state($State = "")
+
+</A></H2>
+Test. Checks to see if the value submitted is a valid US postal State code.
+Checks all 50 states, Washington DC, Puerto Rico and the US Virgin Islands.
+Case insensitive check.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_zip_zipcode_">is_zip($zipcode = "")
+
+</A></H2>
+Test. Checks to see if the value submitted is a valid US postal zip code
+format. Does not check to see if it's an actual zip code. (ie, 11111 will
+return true). The zip code check looks for 10 digit zips ( 11111-11111 ) as
+well as 5 digit zips. The zip code (with non-digit chars removed) may not
+exceed 10 digits or be fewer than 5. The only valid characters are 0-9 and
+the - character.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="is_country_countrycode_">is_country($countrycode = "")
+
+</A></H2>
+Test. And a big test at that. Checks that the 2 character country code
+submitted is a valid country code. There are 243 country codes in the CC
+database. (Up from 232 in 1.1) If it finds a valid country code, it returns
+<STRONG>the full name of the country</STRONG>. Returns null otherwise. eg <CODE>is_country(``TT'')</CODE> would return
+``Trinidad, Tobago''. If you find a country code that I don't have listed
+here, <STRONG>please</STRONG> send it to me, <A
+HREF="MAILTO:cdi@thewebmasters.net.">cdi@thewebmasters.net.</A>
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="VARIABLES">VARIABLES
+
+</A></H1>
+<P>
+<HR>
+<H2><A NAME="ERROR_string_">ERROR (string)
+
+</A></H2>
+This variable contains the text of the last test ERROR encountered. If a
+test fails, the text description of why the test failed can be retrieved by
+grabbing this variable.
+
+
+<P>
+
+<P>
+<HR>
+<H2><A NAME="CLEAR_boolean_default_false">CLEAR (boolean, default == false)
+
+</A></H2>
+CLEAR, if set to true, automatically clears the ERROR variable at the
+beginning of each new test.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="EXAMPLES">EXAMPLES
+
+</A></H1>
+see SYNOPSIS
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="DOCUMENTATION">DOCUMENTATION
+
+</A></H1>
+This is it.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="INSTALLATION">INSTALLATION
+
+</A></H1>
+Copy the class file to the location specified in your PHP3.INI file.
+Failing that, use the full path to the class file's location in your
+<CODE>include()</CODE> directive.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+Fixed several bugs in 1.1: see CHANGELOG for details
+
+
+<P>
+
+<PRE>    Fixed: is_email() DNS bug: Valid hosts were returning false.
+    Fixed: is_hostname() Improperly written regex. (Not POSIX)
+    Fixed: is_country() added 14 missing countries
+    Fixed: browser_gen() added 24 more spiders, fixed on bad entry
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="VERSION">VERSION
+
+</A></H1>
+Version 1.2 1999/03/05 CDI, <A
+HREF="MAILTO:cdi@thewebmasters.net">cdi@thewebmasters.net</A>
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+Copyright (c) 1999, CDI - <A
+HREF="MAILTO:cdi@thewebmasters.net.">cdi@thewebmasters.net.</A> All Rights
+Reserved.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="LICENSE">LICENSE
+
+</A></H1>
+This program is free software; you can redistribute it and/or modify it
+under the GNU General Artistic License, with the following stipulations;
+
+
+<P>
+
+Changes or modifications must retain these Copyright statements. Changes or
+modifications <STRONG>must</STRONG> be submitted to the AUTHOR, <A
+HREF="MAILTO:cdi@thewebmasters.net.">cdi@thewebmasters.net.</A>
+
+
+<P>
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the Artistic License for more
+details. This software is distributed <STRONG>AS-IS</STRONG>.
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="AVAILABILITY">AVAILABILITY
+
+</A></H1>
+<A
+HREF="http://www.thewebmasters.net/php/">http://www.thewebmasters.net/php/</A>
+
+
+
+<P>
+
+<P>
+<HR>
+<H1><A NAME="HISTORY">HISTORY
+
+</A></H1>
+see CHANGELOG
+
+
+<P>
+
+</DL>
+    </BODY>
+
+    </HTML>
