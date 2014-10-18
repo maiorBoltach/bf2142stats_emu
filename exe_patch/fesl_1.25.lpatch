@@ -1,0 +1,90 @@
+====================================================================================
+#
+# this file has been created for the Lame patcher program available for both *nix
+# and Windows platforms.
+# You need this program for continuing the patching of your files:
+#
+#   http://aluigi.org/mytoolz.htm#lpatch
+#
+# Quick step-by-step for Windows:
+# - launch lpatch.exe
+# - select this fesl.lpatch file
+# - read the message windows and click yes
+# - select the file (usually executables or dlls) to patch
+# - read the message windows to know if everything has been patched correctly
+
+TITLE
+    EA games fesl.ea.com certificate verification remover 0.2
+    by Luigi Auriemma
+    e-mail: aluigi@autistici.org
+    web:    aluigi.org
+
+INTRO
+    this modification removes the verification of the SSL certificate
+    sent by the *.fesl.ea.com server (ports 18240,18020,18120,18081,
+    18125,18270,18060,18210,18310 and others) when an EA game logins
+    on it.
+    this login mechanism is used with clients and servers so this
+    remover is intended to both.
+    .
+    the result of such modification is that the game will not longer
+    drop the connection if the fesl server certificate is invalid so
+    the users can build their own "fesl" server for LAN gaming and
+    other possible things like understanding the protocol (fsys, acct,
+    TXN, ... very simple, use stcppipe -S for dumping the whole
+    decrypted connection).
+    .
+    some games that use fesl are Battlefield 2142 / Heroes,
+    Command & Conquer 3, The Lord of the Rings, Medal of Honor Airborne,
+    NASCAR, Need for Speed Carbon / Undercover, Mercenaries 2, Dragon
+    Age and many others.
+    .
+    note that the executable must be NOT encrypted or compressed (that
+    happens when are used CD protections).
+
+FILE
+    *.exe
+
+MAX_CHANGES
+    12
+
+
+BYTES_ORIGINAL
+    81 ?? EE 0F 00 00   ; AND ECX,0FEE
+    83 ?? 15            ; ADD ECX,15
+    8B ??               ; MOV EAX,ECX
+
+BYTES_PATCH
+    ?? ?? ?? ?? ?? ??
+    B8 15 00 00 00      ; MOV EAX, 15
+
+
+BYTES_ORIGINAL
+    B8 03 10 00 00      ; MOV EAX,1003
+    5D                  ; POP EBP
+
+BYTES_PATCH
+    B8 15 00 00 00      ; MOV EAX, 15
+
+		
+BYTES_ORIGINAL
+    2E 63 6F 66         ; .cof
+
+BYTES_PATCH
+    2E 63 6F 6D         ; .com
+
+	
+BYTES_ORIGINAL
+    2e 63 66 6d         ; .cfm
+
+BYTES_PATCH
+    2E 63 6F 6D         ; .com
+	
+		
+BYTES_ORIGINAL
+    5C 68 6F 73 74 73   ; \hosts
+
+BYTES_PATCH
+    5C 67 6F 73 74 73   ; \gosts
+
+====================================================================================

@@ -1,0 +1,125 @@
+#######################################################################
+
+Tool:   Lame patcher
+Author: by Luigi Auriemma
+        e-mail: aluigi@autistici.org
+        web:    aluigi.org
+
+#######################################################################
+
+------------
+Introduction
+------------
+
+This program has been written mainly for fun and personal usage because
+I need to have a specific patcher with some requirements, first of all
+open source and easily portable.
+
+The first feature of this program is to apply binary patches to files,
+but with a recent change its job has been enhanced a lot.
+This text file will cover only the old type of patching provided by
+this tool (the binary one).
+
+At the moment the information about the "enhanced mode" (the textual
+files with the lpatch extension) are documented only in the
+src\lpatch_newmode_example.lpatch file and the various patches created
+by me on my website in the Patches section:
+
+  http://aluigi.org/patches.htm
+
+Launch lpatch_nogui.exe from the command-line for having the full list
+of supported options and syntax, they are valid for both the gui and
+nogui version of the tool.
+
+For compiling it on Linux:
+  gcc -o lpatch lpatch.c md5.c
+
+
+#######################################################################
+
+---------
+Feautures
+---------
+
+- MD5 checksum of original and patched file
+- patching of running processes
+- you can add a comment which is showed if the file is successfully
+  patched
+- both patch and unpatch routines are available, so it's possible to
+  restore the original file without additional backup copies
+- small size of the main executable and data file
+- uses MessageBoxes (I don't think this is too good) on Windows and
+  works from console on all the other systems (a command-line version
+  is provided for windows too)
+- the patching process can be forced by the user but it's controlled to
+  avoid to modify bytes that are different than the original file
+- portability, the main program is ever the same and only the data file
+  changes allowing to release only the data file so the size is really
+  micro.
+- The tool works on both *nix and Windows and with both little and big
+  endian architectures
+- easy to use
+
+
+#######################################################################
+
+-----------------
+How it's composed
+-----------------
+
+It is divided into 3 parts:
+
+LPATCH.EXE:  this is the main program that is used to patch files.
+             It is the SAME for each patch you create.
+             If you want to apply a patch you must have only this
+             program and LPATCH.DAT
+
+MLPATCH.EXE: this is the program used to build the data file (works
+             from console).
+             It must be used only by who creates the patch
+
+LPATCH.DAT:  the data file, the container of all the needed
+             informations. Practically the real patch.
+             the data file can have also different names or extensions.
+             usually the .lpatch extension is used for the new type of
+             data patch
+
+
+#######################################################################
+
+------------------------
+How to create lpatch.dat
+------------------------
+
+1) create the data file: "mlpatch original_file patched_file title"
+
+   Example:
+
+     mlpatch original.exe patched.exe "Patch 1.2"
+
+
+   If you want to insert comments you must write a text file containing
+   the comment and then put the filename as last argument of mlpatch:
+
+     mlpatch original.exe patched.exe "Patch 1.2" comment.txt
+
+
+2) copy the lpatch.dat and lpatch.exe in the directory where is located
+   the original file to patch (you need only these 2 files!).
+
+
+Little suggestion: insert the title argument between " chars
+Example:
+
+  mlpatch original.exe patched.exe "Videogame 1.0 No-CD"
+  mlpatch original.exe "patch file ver 1.2.exe" "Videogame 1.2 No-CD"
+
+Remember that the first file (the original one) MUST have a relative
+path because that provided path is saved as is in the patch data file,
+so do NOT use c:\mygame\myexe.exe but put mlpatch.exe temporary in
+c:\mygame and specify myexe.exe.
+I have decided to not modify this thing since it's useful to have a
+relative path with some files (for example data\myfile.dat and so on).
+
+
+#######################################################################
