@@ -1,9 +1,6 @@
-bf2142emu
-=========
+#Battlefield 2142 Statistics Emulator Server
 
-Battlefield 2142 Statistics Emulator Server
-
-Client:
+##Client:
 *1. Install Battlefield 2142
 *2. Replace original bf2142.exe with bf2142.exe from [cracked_exe] folder (for your version)
 *3a. (if you have installed 1.25) Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next lines (сhange your.external.ip to your server's external ip):
