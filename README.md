@@ -22,7 +22,7 @@ your.external.ip stella.ms5.gamespy.com
 your.external.ip eapusher.dice.se
 ```
 
-4. (if you have installed 1.51) Edit bf2142.exe with hex-editor, change 192.168.1.3 to your server's external ip
+4.(if you have installed 1.51) Edit bf2142.exe with hex-editor, change 192.168.1.3 to your server's external ip
 
 (**NOTE**: if you are left with the unallocated space after correcting IP, set dots and change the bit-values ​​of the dots to 00)
 
@@ -38,13 +38,17 @@ your.external.ip eapusher.dice.se
 2. Install MySQL server (latest version [here](http://dev.mysql.com/downloads/mysql/)) .
 3. Import database bf2142.sql to Mysql server.
 4. Edit _launch.bat. Change dbuser, dbpass, dbname.
-5. Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next line (сhange your.external.ip to your server's external ip):
+
+**NOTE**: MySQL should work only on localhost! Don't change dbhost from 127.0.0.1!
+
+5.Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next line (сhange your.external.ip to your server's external ip):
 
 ```
 your.external.ip  stella.master.gamespy.com 
 ```
 
-6. Start _launch.bat
+6.Start _launch.bat
 
-**NOTE**: MySQL should work only on localhost! Don't change dbhost from 127.0.0.1!
+
+
 **NOTE**: You can change License Agreement in license.txt, but however, due to the fact that BF2142 does not know a line break, the text will be like a one-liner.
