@@ -1,0 +1,1 @@
+start fesl_login_server -dbhost 192.168.70.206 -dbname test2142 -dbuser us2142 -dbpass pw2142 
