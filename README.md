@@ -26,8 +26,6 @@ your.external.ip eapusher.dice.se
 
 (**NOTE**: if you are left with the unallocated space after correcting IP, set dots and change the bit-values ​​of the dots to 00)
 
-=========
-
 ## Server
 
 ### Fesl Login Server (GameSpy Emulator)
@@ -35,7 +33,9 @@ your.external.ip eapusher.dice.se
 **NOTE**: To simplify the work, use the AMP package, for example, XAMPP.
 
 1. Install OpenSSL (>= 1.0.0). Latest version you can download [here](https://www.openssl.org/source/).
-  UPD (07.01.2020). For Windows download from [here](https://slproweb.com/products/Win32OpenSSL.html). We have 100% guarantee that it works with **Win32 OpenSSL v1.0.2u**. More late versions doesn't work (TODO: recheck again). 
+
+**UPD (07.01.2020).** For Windows download from [here](https://slproweb.com/products/Win32OpenSSL.html). We have 100% guarantee that it works with **Win32 OpenSSL v1.0.2u**. More late versions doesn't work (TODO: recheck again). 
+
 2. Install MySQL server (latest version [here](http://dev.mysql.com/downloads/mysql/)) .
 3. Import database bf2142.sql to Mysql server.
 4. Copy to your fesl folder libmySQL.dll from MySQL folder
