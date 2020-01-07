@@ -82,5 +82,11 @@ display_errors = Off
 
 1. Download BF2142 serverfiles
 2. Extract "python" folder to the main folder with server. Agree with overwriting.
-3. Patch BF2142_w32ded.exe with lpatch.exe ("exe_patch" folder). **NOTE**: 1.25 patch with fesl_1.25.lpatch, 1.51 - fesl.lpatch
-4. Configure your server gameplay settings and start BF2142_w32ded.exe.
+3. **UPD (07.01.2020).** Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next line (сhange your.external.ip to your server's external ip):
+
+```
+your.external.ip  stella.prod.gamespy.com 
+```
+
+4. Patch BF2142_w32ded.exe with lpatch.exe ("exe_patch" folder). **NOTE**: 1.25 patch with fesl_1.25.lpatch, 1.51 - fesl.lpatch
+5. Configure your server gameplay settings and start BF2142_w32ded.exe.
