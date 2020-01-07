@@ -37,8 +37,11 @@ your.external.ip eapusher.dice.se
 **UPD (07.01.2020).** For Windows download from [here](https://slproweb.com/products/Win32OpenSSL.html). We have 100% guarantee that it works with **Win32 OpenSSL v1.0.2u**. More late versions doesn't work (TODO: recheck again). 
 
 2. Install MySQL server (latest version [here](http://dev.mysql.com/downloads/mysql/)) .
-3. Import database bf2142.sql to Mysql server.
+3. Import database bf2142.sql to MYSQL server.
 4. Copy to your fesl folder libmySQL.dll from MySQL folder
+
+**UPD (07.01.2020).** New versions of XAMPP don't contain C Connector, you can download it manually from [here](https://downloads.mysql.com/archives/c-c/) 
+
 5. Edit _launch.bat. Change dbuser, dbpass, dbname.
 
 **NOTE**: MySQL should work only on localhost! Don't change dbhost from 127.0.0.1!
