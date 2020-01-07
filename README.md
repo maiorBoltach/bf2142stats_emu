@@ -1,6 +1,6 @@
-#Battlefield 2142 Statistics Emulator Server
+# Battlefield 2142 Statistics Emulator Server
 
-##Client
+## Client
 1. Install Battlefield 2142
 2. Replace original bf2142.exe with bf2142.exe from [cracked_exe] folder (for your version)
 3. (if you have installed 1.25) Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next lines (сhange your.external.ip to your server's external ip):
@@ -28,9 +28,9 @@ your.external.ip eapusher.dice.se
 
 =========
 
-##Server
+## Server
 
-###Fesl Login Server (GameSpy Emulator)
+### Fesl Login Server (GameSpy Emulator)
 
 **NOTE**: To simplify the work, use the AMP package, for example, XAMPP.
 
@@ -53,7 +53,7 @@ your.external.ip  stella.master.gamespy.com
 **NOTE**: You can change License Agreement in license.txt, but however, due to the fact that BF2142 does not know a line break, the text will be like a one-liner.
 
 
-###WebServer
+### WebServer
 
 **NOTE**: Stats requires PHP >= 5.3.8
 
@@ -68,7 +68,7 @@ display_errors = Off
 ```
 
 
-###GameServer
+### GameServer
 
 1. Download BF2142 serverfiles
 2. Extract "python" folder to the main folder with server. Agree with overwriting.
