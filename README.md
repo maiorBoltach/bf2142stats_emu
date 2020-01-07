@@ -26,6 +26,12 @@ your.external.ip eapusher.dice.se
 
 (**NOTE**: if you are left with the unallocated space after correcting IP, set dots and change the bit-values ​​of the dots to 00)
 
+**UPD (07.01.2020).** (if you have installed 1.51) Edit bf2142.exe with hex-editor. Change in address 0045c980 blocks 4-5-6-7 values (0301a8c0) to our own by next rules:
+1) Revert your IP (e.g. 33.44.55.66 revert to 66.55.44.33)
+2) Convert value to hex (you can use [this tool](https://www.browserling.com/tools/ip-to-hex)). e.g. 66.55.44.33 -> 42372c21
+3) Replace 0301a8c0 with 42372c21
+
+
 ## Server
 
 ### Fesl Login Server (GameSpy Emulator)
