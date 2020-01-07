@@ -1,6 +1,6 @@
-#Battlefield 2142 Statistics Emulator Server
+# Battlefield 2142 Statistics Emulator Server
 
-##Client
+## Client
 1. Install Battlefield 2142
 2. Replace original bf2142.exe with bf2142.exe from [cracked_exe] folder (for your version)
 3. (if you have installed 1.25) Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next lines (сhange your.external.ip to your server's external ip):
@@ -26,18 +26,28 @@ your.external.ip eapusher.dice.se
 
 (**NOTE**: if you are left with the unallocated space after correcting IP, set dots and change the bit-values ​​of the dots to 00)
 
-=========
+**UPD (07.01.2020).** (if you have installed 1.51) Edit bf2142.exe with hex-editor. Change in address 0045c980 blocks 4-5-6-7 values (0301a8c0) to our own by next rules:
+1) Revert your IP (e.g. 33.44.55.66 revert to 66.55.44.33)
+2) Convert value to hex (you can use [this tool](https://www.browserling.com/tools/ip-to-hex)). e.g. 66.55.44.33 -> 42372c21
+3) Replace 0301a8c0 with 42372c21
 
-##Server
 
-###Fesl Login Server (GameSpy Emulator)
+## Server
+
+### Fesl Login Server (GameSpy Emulator)
 
 **NOTE**: To simplify the work, use the AMP package, for example, XAMPP.
 
-1. Install OpenSSL (>= 1.0.0). Latest version you can download [here](https://www.openssl.org/source/) .
+1. Install OpenSSL (>= 1.0.0). Latest version you can download [here](https://www.openssl.org/source/).
+
+**UPD (07.01.2020).** For Windows download from [here](https://slproweb.com/products/Win32OpenSSL.html). I can 100% guarantee that it works with **Win32 OpenSSL v1.0.2u**. More late versions doesn't work (TODO: recheck again). 
+
 2. Install MySQL server (latest version [here](http://dev.mysql.com/downloads/mysql/)) .
-3. Import database bf2142.sql to Mysql server.
+3. Import database bf2142.sql to MYSQL server.
 4. Copy to your fesl folder libmySQL.dll from MySQL folder
+
+**UPD (07.01.2020).** New versions of XAMPP don't contain C Connector, you can download it manually from [here](https://downloads.mysql.com/archives/c-c/) 
+
 5. Edit _launch.bat. Change dbuser, dbpass, dbname.
 
 **NOTE**: MySQL should work only on localhost! Don't change dbhost from 127.0.0.1!
@@ -53,9 +63,10 @@ your.external.ip  stella.master.gamespy.com
 **NOTE**: You can change License Agreement in license.txt, but however, due to the fact that BF2142 does not know a line break, the text will be like a one-liner.
 
 
-###WebServer
+### WebServer
 
 **NOTE**: Stats requires PHP >= 5.3.8
+**UPD (07.01.2020).** Not working on PHP >= 7.0. I can 100% guarantee that it works on PHP 5.4.22. I advise you to use XAMPP 1.8.2
 
 1. Unzip folder "web" to your localhost folder (**WARNING**: Stats system won't work at another location!)
 2. Open ./include/_ccconfig.php and change $db_host, $db_name, $db_user, $db_pass to yours, which you installed in Fesl Login (step 4)
@@ -68,9 +79,15 @@ display_errors = Off
 ```
 
 
-###GameServer
+### GameServer
 
 1. Download BF2142 serverfiles
 2. Extract "python" folder to the main folder with server. Agree with overwriting.
-3. Patch BF2142_w32ded.exe with lpatch.exe ("exe_patch" folder). **NOTE**: 1.25 patch with fesl_1.25.lpatch, 1.51 - fesl.lpatch
-4. Configure your server gameplay settings and start BF2142_w32ded.exe.
+3. **UPD (07.01.2020).** Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next line (сhange your.external.ip to your webserver's external ip):
+
+```
+your.external.ip  stella.prod.gamespy.com 
+```
+
+4. Patch BF2142_w32ded.exe with lpatch.exe ("exe_patch" folder). **NOTE**: 1.25 patch with fesl_1.25.lpatch, 1.51 - fesl.lpatch
+5. Configure your server gameplay settings and start BF2142_w32ded.exe.
