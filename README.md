@@ -82,7 +82,7 @@ display_errors = Off
 
 1. Download BF2142 serverfiles
 2. Extract "python" folder to the main folder with server. Agree with overwriting.
-3. **UPD (07.01.2020).** Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next line (сhange your.external.ip to your server's external ip):
+3. **UPD (07.01.2020).** Edit hosts.ics ("С:\Windows\System32\drivers\etc\hosts.ics") and add next line (сhange your.external.ip to your webserver's external ip):
 
 ```
 your.external.ip  stella.prod.gamespy.com 
