@@ -40,7 +40,7 @@ your.external.ip eapusher.dice.se
 
 1. Install OpenSSL (>= 1.0.0). Latest version you can download [here](https://www.openssl.org/source/).
 
-**UPD (07.01.2020).** For Windows download from [here](https://slproweb.com/products/Win32OpenSSL.html). We have 100% guarantee that it works with **Win32 OpenSSL v1.0.2u**. More late versions doesn't work (TODO: recheck again). 
+**UPD (07.01.2020).** For Windows download from [here](https://slproweb.com/products/Win32OpenSSL.html). I can 100% guarantee that it works with **Win32 OpenSSL v1.0.2u**. More late versions doesn't work (TODO: recheck again). 
 
 2. Install MySQL server (latest version [here](http://dev.mysql.com/downloads/mysql/)) .
 3. Import database bf2142.sql to MYSQL server.
@@ -66,6 +66,7 @@ your.external.ip  stella.master.gamespy.com
 ### WebServer
 
 **NOTE**: Stats requires PHP >= 5.3.8
+**UPD (07.01.2020).** Not working on PHP >= 7.0. I can 100% guarantee that it works on PHP 5.4.22. I advise you to use XAMPP 1.8.2
 
 1. Unzip folder "web" to your localhost folder (**WARNING**: Stats system won't work at another location!)
 2. Open ./include/_ccconfig.php and change $db_host, $db_name, $db_user, $db_pass to yours, which you installed in Fesl Login (step 4)
